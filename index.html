@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Северные Земли</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="game">
+      <div id="bg"></div>
+      <div id="overlay"></div>
+
+      <div id="content">
+        <div id="story"></div>
+        <div id="choices"></div>
+      </div>
+
+      <div id="title-screen">
+        <h1>СЕВЕРНЫЕ ЗЕМЛИ</h1>
+        <p>Миссия героя и его войска.<br />Каждый выбор решает их судьбу.</p>
+
+        <input
+          type="text"
+          id="player-name"
+          class="name-input"
+          placeholder="Введите имя героя"
+          maxlength="20"
+          autocomplete="off"
+        />
+
+        <div class="gender-btns">
+          <button class="start-btn" onclick="startGame('male')">
+            Я — герой
+          </button>
+          <button class="start-btn" onclick="startGame('female')">
+            Я — героиня
+          </button>
+        </div>
+      </div>
+
+      <div id="fade"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

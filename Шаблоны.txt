@@ -1,0 +1,14 @@
+Больше ничего не трогаем и ты должен понимать что это файлы одного проекта. 
+Скажи имя и описание изображения для background изображения. 
+Все требования реализуем как в настоящих проектах уровня Senior.
+Расскажи как понял. В ответе выдай функциями или блоками кода - 
+только очень подробно показывай между каких строк вставлять\удалять код.
+Не меняя и не теряя логики.
+
+
+
+Exact visual style of Heroes of Might and Magic III (1999) adventure map: 
+detailed 3D models rendered into 2D sprites, realistic extreme fantasy art in the 
+vein of Larry Elmore and Boris Vallejo, soft painterly lighting mixed with sharp 
+sprite-like edges, rich but slightly muted late-90s color palette,
+no modern photorealism, no anime, no CGI gloss.
