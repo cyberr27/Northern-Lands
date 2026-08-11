@@ -4,33 +4,51 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  height: 100dvh;
+  height: 100svh;
+}
+
 body {
   background: #0a0a0a;
   color: #e8e0d5;
   font-family: "Georgia", serif;
-  height: 100vh;
+  height: 100%;
+  height: 100dvh;
+  height: 100svh;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
 }
 
 #game {
   width: 100%;
-  max-width: 900px;
-  height: 100vh;
+  max-width: 100%;
+  height: 100%;
+  height: 100dvh;
+  height: 100svh;
   position: relative;
   background: #111;
-  box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
+  box-shadow: none;
+  overflow: hidden;
 }
 
+/* ========== ФОН НА ВЕСЬ ЭКРАН ========== */
 #bg {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
   transition: opacity 1.2s ease;
   filter: brightness(0.55) contrast(1.1) saturate(0.7);
+  z-index: 0;
 }
 
 #overlay {
@@ -42,6 +60,8 @@ body {
     rgba(0, 0, 0, 0.4) 45%,
     rgba(0, 0, 0, 0.25) 100%
   );
+  z-index: 1;
+  pointer-events: none;
 }
 
 #content {
@@ -49,46 +69,67 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 30px 40px 40px;
+  padding: 24px 20px calc(28px + env(safe-area-inset-bottom, 0px));
   z-index: 10;
+  max-width: 100%;
 }
 
 #story {
-  font-size: 1.25rem;
-  line-height: 1.65;
-  margin-bottom: 28px;
+  font-size: clamp(1rem, 2.8vw + 0.6rem, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: 20px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-  max-height: 260px;
+  max-height: min(38vh, 280px);
   overflow-y: auto;
   white-space: pre-wrap;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 4px;
 }
 
 #choices {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .choice-btn {
-  background: rgba(20, 15, 10, 0.75);
+  background: rgba(20, 15, 10, 0.78);
   border: 1px solid #5a4030;
   color: #d4c4b0;
-  padding: 14px 22px;
-  font-size: 1.05rem;
+  padding: 13px 16px;
+  font-size: clamp(0.95rem, 2.2vw + 0.55rem, 1.05rem);
   font-family: inherit;
   cursor: pointer;
   text-align: left;
-  transition: all 0.25s;
+  transition: all 0.25s ease;
   border-radius: 4px;
+  width: 100%;
+  max-width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.35;
+  min-height: 48px; /* удобно для пальца */
+  display: flex;
+  align-items: center;
 }
 
-.choice-btn:hover {
-  background: rgba(60, 35, 20, 0.9);
+.choice-btn:hover,
+.choice-btn:focus-visible {
+  background: rgba(60, 35, 20, 0.92);
   border-color: #a06040;
   color: #f0e6d8;
-  transform: translateX(6px);
+  transform: translateX(4px);
+  outline: none;
 }
 
+.choice-btn:active {
+  transform: translateX(2px) scale(0.99);
+}
+
+/* ========== TITLE SCREEN ========== */
 #title-screen {
   position: absolute;
   inset: 0;
@@ -99,37 +140,44 @@ body {
   align-items: center;
   z-index: 20;
   text-align: center;
-  padding: 40px;
+  padding: 24px 16px;
+  padding-top: max(24px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #title-screen h1 {
-  font-size: 2.8rem;
-  letter-spacing: 4px;
+  font-size: clamp(1.8rem, 6vw + 0.5rem, 2.8rem);
+  letter-spacing: 0.12em;
   color: #c9a88a;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-shadow: 0 0 30px rgba(180, 100, 60, 0.4);
+  line-height: 1.2;
 }
 
 #title-screen p {
   color: #8a7a6a;
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+  font-size: clamp(0.95rem, 2.5vw + 0.4rem, 1.1rem);
+  margin-bottom: 24px;
   max-width: 480px;
+  line-height: 1.45;
 }
 
 .name-input {
   background: rgba(20, 15, 10, 0.85);
   border: 1px solid #5a4030;
   color: #e8e0d5;
-  padding: 14px 20px;
-  font-size: 1.1rem;
+  padding: 14px 18px;
+  font-size: clamp(1rem, 2.5vw + 0.4rem, 1.1rem);
   font-family: inherit;
   text-align: center;
-  width: 280px;
-  margin-bottom: 28px;
+  width: min(280px, 90vw);
+  margin-bottom: 24px;
   border-radius: 4px;
   outline: none;
   transition: border-color 0.25s;
+  -webkit-appearance: none;
 }
 
 .name-input:focus {
@@ -144,22 +192,35 @@ body {
   background: transparent;
   border: 1px solid #8a6040;
   color: #c9a88a;
-  padding: 16px 48px;
-  font-size: 1.15rem;
+  padding: 14px 28px;
+  font-size: clamp(1rem, 2.5vw + 0.4rem, 1.15rem);
   cursor: pointer;
-  letter-spacing: 2px;
+  letter-spacing: 0.08em;
   transition: all 0.3s;
+  min-height: 48px;
+  min-width: 140px;
+  border-radius: 2px;
 }
 
-.start-btn:hover {
+.start-btn:hover,
+.start-btn:focus-visible {
   background: #8a6040;
   color: #111;
+  outline: none;
+}
+
+.start-btn:active {
+  transform: scale(0.98);
 }
 
 .gender-btns {
   display: flex;
-  gap: 20px;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 #fade {
@@ -170,4 +231,90 @@ body {
   pointer-events: none;
   z-index: 30;
   transition: opacity 0.8s;
+}
+
+/* ========== АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ ========== */
+@media (max-width: 600px) {
+  #content {
+    padding: 18px 14px calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #story {
+    max-height: min(42vh, 240px);
+    margin-bottom: 16px;
+    font-size: clamp(0.95rem, 3.2vw + 0.5rem, 1.15rem);
+  }
+
+  #choices {
+    gap: 8px;
+  }
+
+  .choice-btn {
+    padding: 12px 14px;
+    font-size: 0.98rem;
+    min-height: 46px;
+  }
+
+  .choice-btn:hover {
+    transform: none; /* на тач-устройствах сдвиг не нужен */
+  }
+
+  #title-screen h1 {
+    letter-spacing: 0.08em;
+  }
+
+  .gender-btns {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 260px;
+  }
+
+  .start-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  #content {
+    padding: 14px 12px calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #story {
+    max-height: min(40vh, 210px);
+  }
+
+  .choice-btn {
+    padding: 11px 12px;
+    font-size: 0.94rem;
+  }
+}
+
+/* Планшеты и выше — чуть больше воздуха */
+@media (min-width: 768px) {
+  #content {
+    padding: 30px 40px calc(36px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #story {
+    max-height: min(36vh, 300px);
+  }
+
+  .choice-btn {
+    padding: 14px 22px;
+  }
+
+  .choice-btn:hover {
+    transform: translateX(6px);
+  }
+}
+
+/* Очень широкие экраны — ограничиваем только контент, фон остаётся full-bleed */
+@media (min-width: 1200px) {
+  #content {
+    max-width: 900px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 100%;
+  }
 }
