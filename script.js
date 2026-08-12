@@ -134,7 +134,7 @@ const story = {
         },
       },
       {
-        text: "Идти правильно через поля замка Диоса",
+        text: "Идти прямо через поля замка Диоса",
         next: "fields_day1",
         effect: () => {
           state.morale -= 5;
